@@ -1,0 +1,36 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "TitleManager",
+	"Description": "Keeps track of the proficiency level of each tool and the experience level of the tool's category.",
+	"Category": "Other",
+	"CreatedBy": "Narcis Software",
+	"CreatedByURL": "https://github.com/shun126/TitleManager/wiki",
+	"DocsURL": "https://github.com/shun126/TitleManager/discussions",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/shun126/TitleManager",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "TitleManager",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64",
+				"Android"
+			]
+		},
+		{
+			"Name": "TitleManagerEditor",
+			"Type": "UncookedOnly",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}
