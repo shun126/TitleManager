@@ -18,48 +18,67 @@ UTitleManagerComponent::UTitleManagerComponent(const FObjectInitializer& objectI
 void UTitleManagerComponent::InitializeComponent()
 {
 	Super::InitializeComponent();
+	InitializeExperienceCategoryValue();
+}
 
-	if (IsValid(TitleManagerDatabase))
+bool UTitleManagerComponent::InitializeExperienceCategoryValue()
+{
+	if (IsValid(TitleManagerDatabase) == false)
+		return false;
+
+	for (const auto& pair : TitleManagerDatabase->ExperienceCategoryData)
 	{
-		for (const auto& pair : TitleManagerDatabase->ExperienceCategoryData)
+		// 経験値を初期化
+		FExperienceCategoryValue* value = ExperienceCategoryValue.Find(pair.Key);
+		if (value == nullptr)
 		{
-			// 経験値を初期化
-			FExperienceCategoryValue* value = ExperienceCategoryValue.Find(pair.Key);
-			if (value == nullptr)
-			{
-				value = &ExperienceCategoryValue.Add(pair.Key);
+			value = &ExperienceCategoryValue.Add(pair.Key);
+			value->Experience = pair.Value.ExperienceRange.Min;
+		}
+		else
+		{
+			if (value->Experience < pair.Value.ExperienceRange.Min)
 				value->Experience = pair.Value.ExperienceRange.Min;
+			else if (value->Experience > pair.Value.ExperienceRange.Max)
+				value->Experience = pair.Value.ExperienceRange.Max;
+		}
+
+		// ExperienceCategoryDataへのキャッシュ
+		value->ExperienceCategoryData = &pair.Value;
+
+		// 各アイテムの熟練度を初期化
+		for (const auto& name : pair.Value.ProficiencyName)
+		{
+			auto proficiency = value->Proficiency.Find(name);
+			if (proficiency == nullptr)
+			{
+				proficiency = &value->Proficiency.Add(name);
+				proficiency->Proficiency = pair.Value.ProficiencyRange.Min;
 			}
 			else
 			{
-				if (value->Experience < pair.Value.ExperienceRange.Min)
-					value->Experience = pair.Value.ExperienceRange.Min;
-				else if (value->Experience > pair.Value.ExperienceRange.Max)
-					value->Experience = pair.Value.ExperienceRange.Max;
-			}
-
-			// ExperienceCategoryDataへのキャッシュ
-			value->ExperienceCategoryData = &pair.Value;
-
-			// 各アイテムの熟練度を初期化
-			for(const auto& name : pair.Value.ProficiencyName)
-			{
-				auto proficiency = value->Proficiency.Find(name);
-				if (proficiency == nullptr)
-				{
-					proficiency = &value->Proficiency.Add(name);
+				if (proficiency->Proficiency < pair.Value.ProficiencyRange.Min)
 					proficiency->Proficiency = pair.Value.ProficiencyRange.Min;
-				}
-				else
-				{
-					if (proficiency->Proficiency < pair.Value.ProficiencyRange.Min)
-						proficiency->Proficiency = pair.Value.ProficiencyRange.Min;
-					else if (proficiency->Proficiency > pair.Value.ProficiencyRange.Max)
-						proficiency->Proficiency = pair.Value.ProficiencyRange.Max;
-				}
+				else if (proficiency->Proficiency > pair.Value.ProficiencyRange.Max)
+					proficiency->Proficiency = pair.Value.ProficiencyRange.Max;
 			}
 		}
 	}
+
+	return true;
+}
+
+bool UTitleManagerComponent::Load(const FTitleManagerSerializeData& titleManagerSerializeData)
+{
+	ExperienceCategoryValue = titleManagerSerializeData.ExperienceCategoryValue;
+	return InitializeExperienceCategoryValue();
+}
+
+FTitleManagerSerializeData UTitleManagerComponent::Save() const
+{
+	FTitleManagerSerializeData titleManagerSerializeData;
+	titleManagerSerializeData.ExperienceCategoryValue = ExperienceCategoryValue;
+	return titleManagerSerializeData;
 }
 
 const FExperienceCategoryData* UTitleManagerComponent::FindExperienceCategoryData(const FString& categoryName) const
@@ -421,4 +440,14 @@ FString UTitleManagerComponent::FindCategoryTitle(const FString& categoryName) c
 	}
 
 	return titleName;
+}
+
+const UTitleManagerDatabase* UTitleManagerComponent::GetTitleManagerDatabase() const noexcept
+{
+	return TitleManagerDatabase;
+}
+
+const TMap<FString, FExperienceCategoryValue>& UTitleManagerComponent::GetExperienceCategoryValue() const noexcept
+{
+	return ExperienceCategoryValue;
 }

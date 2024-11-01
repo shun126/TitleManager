@@ -33,10 +33,13 @@ struct TITLEMANAGER_API FExperienceCategoryValue
 	UPROPERTY(BlueprintReadWrite, Category = "TitleManager")
 	TMap<FString, FProficiencyValue> Proficiency;
 
+private:
 	/**
 	 * Reference to the corresponding FExperienceCategoryData
 	 * 対応するFExperienceCategoryDataへの参照
 	 */
 	const FExperienceCategoryData* ExperienceCategoryData = nullptr;
+
+	friend class UTitleManagerComponent;
 };
 

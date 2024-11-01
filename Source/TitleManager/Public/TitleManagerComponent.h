@@ -12,6 +12,19 @@ All Rights Reserved.
 #include "TitleManagerComponent.generated.h"
 
 /**
+ * Title Manager Serialization Data
+ * 称号マネージャシリアライズデータ
+ */
+USTRUCT(BlueprintType)
+struct TITLEMANAGER_API FTitleManagerSerializeData
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	TMap<FString, FExperienceCategoryValue> ExperienceCategoryValue;
+};
+
+/**
  * Title Manager
  * 称号マネージャ
  */
@@ -23,6 +36,22 @@ class TITLEMANAGER_API UTitleManagerComponent : public UActorComponent
 public:
 	explicit UTitleManagerComponent(const FObjectInitializer& objectInitializer);
 	virtual ~UTitleManagerComponent() override = default;
+
+	/**
+	 * Load
+	 * ロード
+	 * @param titleManagerSerializeData ロードするデータ
+	 */
+	UFUNCTION(BlueprintCallable, Category = "TitleManager")
+	bool Load(const FTitleManagerSerializeData& titleManagerSerializeData);
+
+	/**
+	 * Save
+	 * セーブ
+	 * @return 経験値と熟練度
+	 */
+	UFUNCTION(BlueprintCallable, Category = "TitleManager")
+	FTitleManagerSerializeData Save() const;
 
 	/**
 	 * Get experience.
@@ -161,8 +190,25 @@ public:
 	 */
 	const FExperienceCategoryData* FindExperienceCategoryData(const FString& categoryName) const;
 
+	/**
+	 * Get UTitleManagerDatabase
+	 * UTitleManagerDatabaseを取得します
+	 * @return UTitleManagerDatabase
+	 */
+	const UTitleManagerDatabase* GetTitleManagerDatabase() const noexcept;
+
+	/**
+	 * Gain experience and proficiency
+	 * 経験値や熟練度を取得します
+	 * @return TMap<FString, FExperienceCategoryValue>
+	 */
+	const TMap<FString, FExperienceCategoryValue>& GetExperienceCategoryValue() const noexcept;
+
 public:
 	virtual void InitializeComponent() override;
+
+private:
+	bool InitializeExperienceCategoryValue();
 
 protected:
 	/**
