@@ -1,7 +1,6 @@
 /**
 @author		Shun Moriya
-@copyright	2024- Shun Moriya
-All Rights Reserved.
+@copyright 2024 Shun Moriya All Rights Reserved.
 */
 
 #include "TitleManagerEditorModule.h"
@@ -10,7 +9,6 @@ All Rights Reserved.
 #include <AssetToolsModule.h>
 #include <IAssetTools.h>
 #include <ToolMenus.h>
-#include <Misc/EngineVersionComparison.h>
 #include <Misc/MessageDialog.h>
 #include <UObject/UObjectGlobals.h>
 

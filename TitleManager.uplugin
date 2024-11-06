@@ -8,7 +8,7 @@
 	"CreatedBy": "Narcis Software",
 	"CreatedByURL": "https://github.com/shun126/TitleManager/wiki",
 	"DocsURL": "https://github.com/shun126/TitleManager/discussions",
-	"MarketplaceURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/Fab/product/0e015931-fe15-40fb-8b29-81cb5e32a744",
 	"SupportURL": "https://github.com/shun126/TitleManager",
 	"CanContainContent": true,
 	"IsBetaVersion": true,
