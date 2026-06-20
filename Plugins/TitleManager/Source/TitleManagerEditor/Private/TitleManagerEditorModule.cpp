@@ -48,4 +48,4 @@ void FTitleManagerEditorModule::ShutdownModule()
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FTitleManagerEditorModule, TitleManagerEditorModule)
+IMPLEMENT_MODULE(FTitleManagerEditorModule, TitleManagerEditor)

@@ -110,7 +110,7 @@ int32 UTitleManagerComponent::SetExperience(const FString& categoryName, int32 e
 		FString databaseName;
 		if (TitleManagerDatabase)
 			databaseName = TitleManagerDatabase->GetName();
-		TITLE_MANAGER_ERROR(TEXT("Unable to register Category 'A' under ExperienceCategoryData 'B'.")
+		TITLE_MANAGER_ERROR(TEXT("Unable to register Category '%s' under ExperienceCategoryData '%s'.")
 			, *categoryName
 			, *databaseName
 		);
@@ -141,7 +141,7 @@ int32 UTitleManagerComponent::AddExperience(const FString& categoryName, const i
 		FString databaseName;
 		if (TitleManagerDatabase)
 			databaseName = TitleManagerDatabase->GetName();
-		TITLE_MANAGER_ERROR(TEXT("Unable to register Category 'A' under ExperienceCategoryData 'B'.")
+		TITLE_MANAGER_ERROR(TEXT("Unable to register Category '%s' under ExperienceCategoryData '%s'.")
 			, *categoryName
 			, *databaseName
 		);
@@ -171,7 +171,7 @@ float UTitleManagerComponent::GetExperienceRatio(const FString& categoryName)
 		FString databaseName;
 		if (TitleManagerDatabase)
 			databaseName = TitleManagerDatabase->GetName();
-		TITLE_MANAGER_ERROR(TEXT("Unable to register Category 'A' under ExperienceCategoryData 'B'.")
+		TITLE_MANAGER_ERROR(TEXT("Unable to register Category '%s' under ExperienceCategoryData '%s'.")
 			, *categoryName
 			, *databaseName
 		);
@@ -222,7 +222,7 @@ int32 UTitleManagerComponent::SetProficiency(const FString& categoryName, const 
 		FString databaseName;
 		if (TitleManagerDatabase)
 			databaseName = TitleManagerDatabase->GetName();
-		TITLE_MANAGER_ERROR(TEXT("Unable to register Category 'A' under ExperienceCategoryData 'B'.")
+		TITLE_MANAGER_ERROR(TEXT("Unable to register Category '%s' under ExperienceCategoryData '%s'.")
 			, *categoryName
 			, *databaseName
 		);
@@ -268,7 +268,7 @@ int32 UTitleManagerComponent::AddProficiency(const FString& categoryName, const 
 		FString databaseName;
 		if (TitleManagerDatabase)
 			databaseName = TitleManagerDatabase->GetName();
-		TITLE_MANAGER_ERROR(TEXT("Unable to register Category 'A' under ExperienceCategoryData 'B'.")
+		TITLE_MANAGER_ERROR(TEXT("Unable to register Category '%s' under ExperienceCategoryData '%s'.")
 			, *categoryName
 			, *databaseName
 		);

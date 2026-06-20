@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
+	"Version": 2,
+	"VersionName": "1.1",
 	"FriendlyName": "TitleManager",
 	"Description": "Keeps track of the proficiency level of each tool and the experience level of the tool's category.",
 	"Category": "Other",
